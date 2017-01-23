@@ -25,8 +25,20 @@ class InstallerServiceProvider extends ServiceProvider {
 	 * @var array
 	 */
 	protected $providers = [
+		\Collective\Html\HtmlServiceProvider::class,
 		\Giwrgos88\Installer\Providers\AssetsServiceProvider::class,
 		\Giwrgos88\Installer\Providers\RouteServiceProvider::class,
+	];
+
+	/**
+	 * The faced array that are use on the project.
+	 *
+	 * @var array
+	 */
+	protected $facadeAliases = [
+		'Form' => \Collective\Html\FormFacade::class,
+		'Html' => \Collective\Html\HtmlFacade::class,
+		'Input' => \Illuminate\Support\Facades\Input::class,
 	];
 
 	/**
@@ -47,6 +59,8 @@ class InstallerServiceProvider extends ServiceProvider {
 		 * Bind Package providers to Laravel's IOC container
 		 */
 		$this->registerProviders();
+
+		$this->registerAlias();
 	}
 
 	/**
@@ -72,5 +86,15 @@ class InstallerServiceProvider extends ServiceProvider {
 	 *
 	 */
 	public function map() {
+	}
+
+	/**
+	 * Register Allias
+	 */
+	public function registerAlias() {
+
+		foreach ($this->facadeAliases as $alias => $facade) {
+			$this->app->alias($alias, $facade);
+		}
 	}
 }

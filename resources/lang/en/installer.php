@@ -52,6 +52,7 @@ return [
 	],
 	'button' => [
 		'next' => 'Next',
+		'retry' => 'Try Again',
 	],
 	'erros' => [
 		'wrong' => 'Something went wrong.',

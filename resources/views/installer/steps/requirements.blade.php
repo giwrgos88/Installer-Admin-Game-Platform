@@ -42,7 +42,12 @@
                                 </tbody>
                             </table>
                             <div class="text-xs-center">
+                                @if (!isset($requirements['errors']))
                                 <a href="{{ route('Installer::permissions') }}" class="btn btn-primary px-2 ">{{{trans('installer::installer.button.next')}}}</a>
+                                @else
+                                <a href="{{ route('Installer::requirements') }}" class="btn btn-primary px-2 ">{{{trans('installer::installer.button.retry')}}}</a>
+                                @endif
+
                             </div>
                         </div>
                     </div>

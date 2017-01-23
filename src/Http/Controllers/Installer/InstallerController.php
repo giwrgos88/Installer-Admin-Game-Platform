@@ -3,6 +3,7 @@
 namespace Giwrgos88\Installer\Http\Controllers\Installer;
 
 use Artisan;
+use Giwrgos88\Game\Core\Models\Admin\Role;
 use Giwrgos88\Game\Core\Models\Admin\Users;
 use Giwrgos88\Installer\Classes\Helpers\ENVGenerator;
 use Giwrgos88\Installer\Classes\Helpers\PermissionsChecker;
@@ -11,7 +12,6 @@ use Giwrgos88\Installer\Http\Controllers\Controller;
 use Giwrgos88\Installer\Http\Requests\InstallationPostRequest;
 use Giwrgos88\Installer\Http\Requests\InstallationUserPostRequest;
 use Session;
-use Ultraware\Roles\Models\Role;
 
 class InstallerController extends Controller {
 
@@ -26,23 +26,19 @@ class InstallerController extends Controller {
 
 	public function requirements() {
 		$requirements = RequirementsChecker::check(config('installer.requirements'));
+
 		if (!isset($requirements['errors'])) {
-			if (!Session::has('steps')) {
-				Session::put('steps', 2);
-			}
+			Session::put('steps', 2);
 		}
 
 		return view('installer::installer.steps.requirements', ['requirements' => $requirements, 'requirementsConfig' => config('installer.requirements')]);
 	}
 
 	public function permissions() {
-		if (Session::get('steps') >= 3) {
-			abort(404);
-		}
 
 		$permissions = PermissionsChecker::check(config('installer.permissions'));
 
-		if (!isset($permissions['errors'])) {
+		if (!isset($requirements['errors'])) {
 			Session::put('steps', 3);
 		}
 
@@ -50,9 +46,6 @@ class InstallerController extends Controller {
 	}
 
 	public function setup() {
-		if (Session::get('steps') >= 4) {
-			abort(404);
-		}
 
 		return view('installer::installer.steps.setup');
 	}
@@ -73,10 +66,6 @@ class InstallerController extends Controller {
 	}
 
 	public function user() {
-		if (Session::get('steps') >= 5) {
-			abort(404);
-		}
-
 		return view('installer::installer.steps.user');
 	}
 
