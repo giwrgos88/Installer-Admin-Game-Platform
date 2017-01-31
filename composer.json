@@ -21,11 +21,7 @@
   "require": {
     "php": ">=7.0",
     "giwrgos88/core-game-platform": "~1.0",
-<<<<<<< HEAD
     "laravelcollective/html": "^5.4"
-=======
-    "laravelcollective/html": "^5.4",
->>>>>>> a72dfe4448acaec3ccd7684a422c43e49ac3c8ca
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0",
