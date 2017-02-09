@@ -100,7 +100,7 @@ class RouteServiceProvider extends ServiceProvider {
 	protected function mapWebRoutes() {
 		$middleware = ['core_user', 'canBeInstalled'];
 		if (config('core_game.SSL_ENABLED')) {
-			$middleware[] = ['force_ssl'];
+			$middleware[] = 'force_ssl';
 		}
 		Route::group([
 			'middleware' => $middleware,
